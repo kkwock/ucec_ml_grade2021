@@ -20,7 +20,7 @@ from sklearn.linear_model import LogisticRegressionCV
 from tqdm import tqdm
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, roc_auc_score
 import matplotlib.pyplot as plt
-from sklearn.metrics import plot_roc_curve
+from scikitplot.metrics import plot_roc_curve
 from sklearn import metrics
 from sklearn.feature_selection import SelectFromModel
 import dill
@@ -35,7 +35,7 @@ cv=5
 test_size=0.2
 l1_ratios=[0.001, 0.005, 0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9]
 
-os.chdir("/data10/working_groups/balint_group/gargya.peter/R/uterus")
+os.chdir("./")
 
 features = pd.read_table('uterus_rnaseq_VST.txt', sep="\t", index_col=0)
 features = features[features['label']!="G2"]
@@ -130,7 +130,7 @@ print(statistics.mean(valid_auc))
 #%%
 #               PART2: retrain model on whole dataset, predict G2
 import os
-os.chdir("/data10/working_groups/balint_group/gargya.peter/R/uterus")
+os.chdir("./")
 
 import dill                          
 dill.load_session('globalsave_part1.pkl')
@@ -228,7 +228,7 @@ y_pred_proba.to_csv("/data10/working_groups/balint_group/gargya.peter/R/uterus/G
 #%%
 #                 PART3: important overlapping genes during CV-s
 import os
-os.chdir("/data10/working_groups/balint_group/gargya.peter/R/uterus")
+os.chdir("./")
 
 import dill                          
 dill.load_session('globalsave_part1.pkl')
@@ -300,7 +300,7 @@ plt.xlabel('Number of genes', fontsize=14)
 plt.legend()
 plt.title("Results of iterative analysis")
 ax.tick_params(axis='both', which='major', labelsize=14)
-plt.savefig("/data10/working_groups/balint_group/gargya.peter/R/uterus/loop_AUCs_min_num_genes.pdf")
+plt.savefig("./loop_AUCs_min_num_genes.pdf")
 plt.close('all')
 
 
@@ -308,7 +308,6 @@ plt.close('all')
 #%%
 #                   PART4: results with min num genes
 import os
-os.chdir("/data10/working_groups/balint_group/gargya.peter/R/uterus")
 
 import dill                          
 dill.load_session('globalsave_part1.pkl')
